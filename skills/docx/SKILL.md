@@ -11,7 +11,7 @@ If you want to read and don't plan to write to a docx file, you should use `read
 
 # Getting docx content
 
-- Read-only: use `read_docx_file_content` (takes `filepath`). No open/close needed.
+- Read-only: use `read_docx_file_content` (takes `filepath`). No open/close needed. However, if you plan to edit the docx file, you should use `open_docx_file` and `get_content` instead.
 - Within an edit session: use `get_content` after `open_docx_file`.
 
 Both support pagination via `characterCountLimit` (max 50,000) and `startingAfterParagraphId`. Response: `{ content, lastParagraphId, hasMore }`. To paginate, pass the returned `lastParagraphId` as `startingAfterParagraphId` in the next call. Repeat until `hasMore` is false.
@@ -20,8 +20,9 @@ Both support pagination via `characterCountLimit` (max 50,000) and `startingAfte
 
 1. We prefer using bullet points for numbered paragraphs to using numbers for numbered paragraphs.
 2. We prefer the comment to range over some text, not an empty text.
-3. You must pay attention to the `class` attributes of `<p>` and `<span>`. The `class` attribute specifies styles using Tailwind-like CSS classes. When you add a new paragraph, rewrite a paragraph, or add a comment, you must think about what styles you want to apply to the paragraph. You should base this on the paragraphs around it.
-4. We support styling through Tailwind-like CSS classes. Most of them are self-explanatory or conform to the TailwindCSS naming convention. Here are the supported CSS classes:
+3. You must pay attention to the `class` attributes of `<p>` and `<span>`. The `class` attribute specifies styles using Tailwind-like CSS classes. When you add a new paragraph, rewrite a paragraph, or add a comment, you must think about what styles you want to apply to the paragraph. You should base this on the surrounding paragraphs.
+4. `<bullet>` must always contain the attribute `id` and `level`. When rewriting or inserting a paragraph, you must think about what ID and level should be. If you want to add a new bullet point set first, you can do so using `create_new_bullet_point`.
+5. We support styling through Tailwind-like CSS classes. Most of them are self-explanatory or conform to the TailwindCSS naming convention. Here are the supported CSS classes:
   - `p-style-[<predefined_style>]`: apply the predefined style to a paragraph.
   - `pb-[<number>px]`: the padding bottom of a paragraph.
   - `pt-[<number>px]`: the padding top of a paragraph.
@@ -30,8 +31,10 @@ Both support pagination via `characterCountLimit` (max 50,000) and `startingAfte
   - `justify-[<position>]`: the paragraph justification whose position can be start, end, both, or center;
   - `text-indent-[<number>px]`: the padding left of the paragraph's first line.
   - `font-[<font_face>]`: the font face. 
+  - `font-theme-[<theme_name>]`: the theme of the font.
   - `font-bold`: make the text bold.
   - `text-[#<hex_color>]`: the font color.
+  - `text-theme-[<theme_name>]`: the theme color of the text.
   - `text-[<font_size>px]`: the font size.
   - `style-[<predefined_style>]`: apply the predefined style to a span.
   - `leading-[<number>px]`: the line height.
