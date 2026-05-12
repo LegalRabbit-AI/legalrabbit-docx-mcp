@@ -9,6 +9,13 @@ If you plan to write to a docx file, you must always invoke the tool `open_docx_
 
 If you want to read and don't plan to write to a docx file, you should use `read_docx_file_content` to read the content of a docx file.
 
+# Getting docx content
+
+- Read-only: use `read_docx_file_content` (takes `filepath`). No open/close needed.
+- Within an edit session: use `get_content` after `open_docx_file`.
+
+Both support pagination via `characterCountLimit` (max 50,000) and `startingAfterParagraphId`. Response: `{ content, lastParagraphId, hasMore }`. To paginate, pass the returned `lastParagraphId` as `startingAfterParagraphId` in the next call. Repeat until `hasMore` is false.
+
 # General style guide
 
 1. We prefer using bullet points for numbered paragraphs to using numbers for numbered paragraphs.
@@ -31,7 +38,7 @@ If you want to read and don't plan to write to a docx file, you should use `read
   - `leading-rule-[<rule>]`: the line height computation rule. Can be ignored most of the times.
   - `all-small-caps`: make the text small caps.
   - `line-through`: make the text strikethrough.
-  - `underline-<underline_style>`: make the text underlined with one of the following styles: none (default), single, thinck, double, and dash.
+  - `underline-<underline_style>`: make the text underlined with one of the following styles: none (default), single, thick, double, and dash.
   - `italic`: make the text italic.
   - `vertical-align-[<alignment>]`: align the text vertically. Can be baseline (default), superscript, and subscript.
 
@@ -43,7 +50,7 @@ Each paragraph is a <p> with its ID. Each paragraph may have directly or indirec
 
 1. <span> contains only text. Note that whitespaces within a <span> are significant. You must be careful about adding or removing whitespaces. <span> cannot contain any other element inside.
 2. <ins> indicates an insertion tracked change. The <ins> will contain an ID and author. It must not contain text directly. It must contain <span> or <p> or both.
-3. <del> indicates an insertion tracked change. The <del> will contain an ID and author. It must not contain text directly. It must contain <span> or <p> or both.
+3. <del> indicates a deletion tracked change. The <del> will contain an ID and author. It must not contain text directly. It must contain <span> or <p> or both.
 4. <bullet> with its `id` and `level` attribute. <bullet> indicates that the paragraph starts with a bullet point. The label of the bullet point is the content of the element <bullet>. <bullet> must not contain any other element.
 
 <table> represents a table. <tr> represents a row, and <td> represents a cell within a row.
@@ -142,7 +149,7 @@ If you want to add one more level to the current bullet point, then you must pro
 
 If you want to add a new bullet point set with its first level, then you must set the bullet point ID to `null`.
 
-The operation returns the bullet point ID and the level. Then, you can use those values to specify the bullet point in a paragraph with the `<bullet id="BULLET_POINT_ID", level="LEVEL">` element.
+The operation returns the bullet point ID and the level. Then, you can use those values to specify the bullet point in a paragraph with the `<bullet id="BULLET_POINT_ID" level="LEVEL">` element.
 
 # Reading a PDF file
 
@@ -158,7 +165,7 @@ You must invoke `open_docx_file` with the wanted filepath and set `isNew` to `tr
 
 Sometimes the user might want to create a new docx file based on an existing docx file, then you can invoke `open_docx_file` with the wanted filepath, set `isNew` to `true`, and set `templateDocxFilePath` to the existing docx file.
 
-You may use `insert_paragraph`, specify the `newParagraph` (required, must contain only one top-level `<p>`) and `insertBeforeParagraphId` (optional) parameter to insert a paragraph. 
+You may use `insert_paragraph` to add content. Specify the `newParagraph` (required, must contain only one top-level `<p>`) and `insertBeforeParagraphId` (optional) parameter to insert a paragraph. 
 If you want to insert multiple paragraphs, you can use `insert_paragraph` multiple times.
 
 You don't need to use the tracked changes e.g. `<ins>` and `<del>`. Inserting paragraph returns the paragraph ID, which you can use to add comments if you wish to do so.
