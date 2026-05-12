@@ -20,7 +20,7 @@ Both support pagination via `characterCountLimit` (max 50,000) and `startingAfte
 
 1. We prefer using bullet points for numbered paragraphs to using numbers for numbered paragraphs.
 2. We prefer the comment to range over some text, not an empty text.
-3. You must pay attention to the `class` attributes of `<p>` and `<span>`. The `class` attribute specifies styles using a subset of TailwindCSS. When you add a new paragraph or rewrite a paragraph, you must think about what styles you want to apply to the paragraph. You should base this on the paragraphs around it.
+3. You must pay attention to the `class` attributes of `<p>` and `<span>`. The `class` attribute specifies styles using Tailwind-like CSS classes. When you add a new paragraph, rewrite a paragraph, or add a comment, you must think about what styles you want to apply to the paragraph. You should base this on the paragraphs around it.
 4. We support styling through Tailwind-like CSS classes. Most of them are self-explanatory or conform to the TailwindCSS naming convention. Here are the supported CSS classes:
   - `p-style-[<predefined_style>]`: apply the predefined style to a paragraph.
   - `pb-[<number>px]`: the padding bottom of a paragraph.
@@ -80,6 +80,8 @@ For adding a comment, you must pick a paragraph that you want to comment over an
 
 If you want the comment to range over a part of <span>, then you must split the <span> into multiple <span>s.
 
+Try to preserve the styles of the paragraph and the spans involved.
+
 <newCommentRangeStart /> and <newCommentRangeEnd /> are self-closing tags aka void elements.
 
 ### Add reply
@@ -122,6 +124,8 @@ If you want to delete a paragraph, you should use `delete_paragraph` instead of 
 
 Pay attention to HTML entities. For many symbols, we have to use their HTML entities e.g. `&#x201F;`. Do not convert HTML entities to other forms e.g. `\uXXXX`.
 
+Try to preserve the styles of the paragraph and the spans involved.
+
 ### Insert paragraph
 
 For inserting a paragraph, you will need to specify the following parameters:
@@ -133,6 +137,8 @@ When inserting a paragraph, you must consider whether the new paragraph is a con
 You can only insert one paragraph at a time.
 
 Pay attention to HTML entities. For many symbols, we have to use their HTML entities e.g. `&#x201F;`. Do not convert HTML entities to other forms e.g. `\uXXXX`.
+
+Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs.
 
 `insert_paragraph` returns the paragraph ID of the inserted paragraph that you can use in other operations like adding a comment.
 
