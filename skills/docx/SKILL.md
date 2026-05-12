@@ -14,15 +14,26 @@ If you want to read and don't plan to write to a docx file, you should use `read
 1. We prefer using bullet points for numbered paragraphs to using numbers for numbered paragraphs.
 2. We prefer the comment to range over some text, not an empty text.
 3. You must pay attention to the `class` attributes of `<p>` and `<span>`. The `class` attribute specifies styles using a subset of TailwindCSS. When you add a new paragraph or rewrite a paragraph, you must think about what styles you want to apply to the paragraph. You should base this on the paragraphs around it.
-4. The supported Tailwind-like CSS classes are:
-  - `break-after-avoid-page`: avoid breaking the page after the paragraph. Only applies to paragraphs.
-  - `pb-[<number>px]`: the padding bottom of the paragraph. Only applies to paragraphs.
-  - `pt-[<number>px]`: the padding top of the paragraph. Only applies to paragraphs.
+4. We support styling through Tailwind-like CSS classes. Most of them are self-explanatory or conform to the TailwindCSS naming convention. Here are the supported CSS classes:
+  - `p-style-[<predefined_style>]`: apply the predefined style to a paragraph.
+  - `pb-[<number>px]`: the padding bottom of a paragraph.
+  - `pt-[<number>px]`: the padding top of a paragraph.
+  - `ps-[<number>px]`: the padding left of a paragraph.
+  - `pe-[<number>px]`: the padding right of a paragraph.
+  - `justify-[<position>]`: the paragraph justification whose position can be start, end, both, or center;
+  - `text-indent-[<number>px]`: the padding left of the paragraph's first line.
   - `font-[<font_face>]`: the font face. 
-  - `font-bold`: the bold style.
+  - `font-bold`: make the text bold.
   - `text-[#<hex_color>]`: the font color.
   - `text-[<font_size>px]`: the font size.
-  - `apply-[<predefined_style>]`: apply predefined styles.
+  - `style-[<predefined_style>]`: apply the predefined style to a span.
+  - `leading-[<number>px]`: the line height.
+  - `leading-rule-[<rule>]`: the line height computation rule. Can be ignored most of the times.
+  - `all-small-caps`: make the text small caps.
+  - `line-through`: make the text strikethrough.
+  - `underline-<underline_style>`: make the text underlined with one of the following styles: none (default), single, thinck, double, and dash.
+  - `italic`: make the text italic.
+  - `vertical-align-[<alignment>]`: align the text vertically. Can be baseline (default), superscript, and subscript.
 
 # Interpreting the docx content
 
