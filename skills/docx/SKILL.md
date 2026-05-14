@@ -14,7 +14,7 @@ If you want to read and don't plan to write to a docx file, you should use `read
 - Read-only: use `read_docx_file_content` (takes `filepath`). No open/close needed. However, if you plan to edit the docx file, you should use `open_docx_file` and `get_content` instead.
 - Within an edit session: use `get_content` after `open_docx_file`.
 
-Both support pagination via `characterCountLimit` (max 50,000) and `startingAfterParagraphId`. Response: `{ content, lastParagraphId, hasMore }`. To paginate, pass the returned `lastParagraphId` as `startingAfterParagraphId` in the next call. Repeat until `hasMore` is false.
+Both support pagination via `characterCountLimit` (max 20,000) and `startingAfterParagraphId`. Response: `{ content, lastParagraphId, hasMore }`. To paginate, pass the returned `lastParagraphId` as `startingAfterParagraphId` in the next call. Repeat until `hasMore` is false.
 
 # General style guide
 
@@ -33,15 +33,15 @@ Both support pagination via `characterCountLimit` (max 50,000) and `startingAfte
   - `font-[<font_face>]`: the font face. 
   - `font-theme-[<theme_name>]`: the theme of the font.
   - `font-bold`: make the text bold.
-  - `text-[#<hex_color>]`: the font color.
-  - `text-theme-[<theme_name>]`: the theme color of the text.
-  - `text-[<font_size>px]`: the font size.
+  - `color-[#<hex_color>]`: the font color.
+  - `color-theme-[<theme_name>]`: the theme color of the text.
+  - `font-size-[<font_size>px]`: the font size.
   - `style-[<predefined_style>]`: apply the predefined style to a span.
   - `leading-[<number>px]`: the line height.
   - `leading-rule-[<rule>]`: the line height computation rule. Can be ignored most of the times.
   - `all-small-caps`: make the text small caps.
   - `line-through`: make the text strikethrough.
-  - `underline-<underline_style>`: make the text underlined with one of the following styles: none (default), single, thick, double, and dash.
+  - `underline-[<underline_style>]`: make the text underlined with one of the following styles: none (default), single, thick, double, and dash.
   - `italic`: make the text italic.
   - `vertical-align-[<alignment>]`: align the text vertically. Can be baseline (default), superscript, and subscript.
 
