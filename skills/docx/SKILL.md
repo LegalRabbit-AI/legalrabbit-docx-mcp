@@ -145,7 +145,7 @@ You can only insert one paragraph at a time.
 
 Pay attention to HTML entities. For many symbols, we have to use their HTML entities e.g. `&#x201F;`. Do not convert HTML entities to other forms e.g. `\uXXXX`.
 
-Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs.
+Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs. You must decide the appropriate styles of <bullet> by setting its `class` attribute if there is a bullet point.
 
 `insert_paragraph` returns the paragraph ID of the inserted paragraph that you can use in other operations like adding a comment.
 
