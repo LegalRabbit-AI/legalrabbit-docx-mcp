@@ -157,15 +157,13 @@ For inserting one or more paragraphs, you will need to specify the following par
 1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s without the `id` attribute. If a paragraph starts with a bullet point, you must choose the appropriate bullet point ID and level for the element `<bullet>`. The content of `<bullet>` doesn't matter and will be automatically generated based on its `id` and `level` attribute.
 2. `insertBeforeParagraphId`: the insertion position before the existing paragraph ID. If it is set to `null`, then the new paragraph will be inserted as the last paragraph. You must never set this param to an empty string.
 
-You must not add `<ins>` in a new paragraph. You must not set the id of the new paragraph.
+You must not include `<ins>` or `<del>` when inserting a new paragraph. You must not set the `id` attribute of a new paragraph.
 
 When inserting a paragraph, you must consider whether the new paragraph is a continuation of the previous paragraph. If the previous paragraph has `<bullet>` and the new paragraph is the continuation of the previous paragraph, you must consider using `<bullet>` with the same ID and level.
 
 Pay attention to HTML entities. For many symbols, we have to use their HTML entities e.g. `&#x201F;`. Do not convert HTML entities to other forms e.g. `\uXXXX`.
 
 Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs. You must decide the appropriate styles of `<bullet>` by setting its `class` attribute if there is a bullet point.
-
-If you want to insert an empty paragraph, you must set the `newParagraph` parameter to `<p></p>`; you can set appropriate styles on the empty paragraph as well.
 
 `insert_paragraph` returns the paragraph IDs of the inserted paragraphs that you can use in other operations like adding a comment.
 
