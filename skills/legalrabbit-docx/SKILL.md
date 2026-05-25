@@ -32,7 +32,7 @@ The legalrabbit-docx MCP transforms a docx file into a simplified HTML-like mark
 Here are the supported tags:
 1. `<p>` represents a paragraph. It contains zero or one `<bullet>` and zero or more `<span>`s. It has the `id` attribute and optionally the `class` attribute, which represents its styles.
 2. `<bullet>` represents a bullet point and contains a label. It has the `id` (represents the bullet ID), `level` (represents the bullet level), and `class` (represents the style) attributes. It must not contain any other element.
-3. `<span>` represents a piece of text within a paragraph. It can optionally has the `class` attribute, which represents its styles. It must not contain any other element. It can only contain text. Whitespaces and tabs are significant in the text content.
+3. `<span>` represents a piece of text within a paragraph. It can optionally has the `class` attribute, which represents its styles. It must not contain any other element. It can only contain text. Whitespaces and tabs are significant inside `<span>`.
 4. `<table>`, `<tr>`, `<td>` represents a table, a row, and a cell within a row. Table isn't supported when creating a new docx file.
 5. `<ins>` represents a tracked insertion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes. 
 6. `<del>` represents a tracked deletion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes.
@@ -63,6 +63,8 @@ The styles are represented by the `class` attribute. Here are the supported CSS 
 - `vertical-align-[<alignment>]`: align the text vertically. Can be baseline (default), superscript, and subscript.
 
 Sometimes a docx file might use one or more empty paragraph as a gap. When inserting a paragraph, you must pay attention to the padding top and bottom whether to insert one empty paragraphs or use `pt-[<number>px]` and `pb-[<number>px>]` or both. As a general rule, you should follow what the nearby paragraphs do.
+
+We should not separate sentences into different `<span>`s if those `<span>`s have identical styles. You must think whether to add one or more whitespaces at the beginning and end of a `<span>` in order to separate sentences properly.
 
 ## Understands comments
 
