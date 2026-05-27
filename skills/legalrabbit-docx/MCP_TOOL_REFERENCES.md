@@ -154,7 +154,7 @@ Tool: `insert_paragraph`
 Input params: `newParagraphs` (required), `insertBeforeParagraphId` (optional), `insertAfterParagraphId` (optional)
 
 For inserting one or more paragraphs, you will need to specify the following parameters:
-1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s without the `id` attribute. If a paragraph starts with a bullet point, you must choose the appropriate `id` and `level` attribute for `<bullet>`; both attributes must not be `null`. The content of `<bullet>` will be automatically generated based on its `id` and `level` attribute.
+1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s without the `id` attribute or `<gap />`. If a paragraph starts with a bullet point, you must choose the appropriate `id` and `level` attribute for `<bullet>`; both attributes must not be `null`. The content of `<bullet>` will be automatically generated based on its `id` and `level` attribute.
 2. `insertBeforeParagraphId`: the insertion position before the existing paragraph or gap ID. If it is set to `null` or not specified, then this param isn't used. You must never set this param to an empty string.
 3. `insertAfterParagraphId`: the insertion position after the existing paragraph or gap ID. If it is set to `null` or not specified, then this param isn't used. You must never set this param to an empty string.
 
@@ -166,7 +166,7 @@ When inserting a paragraph, you must consider whether the new paragraph is a con
 
 Pay attention to HTML entities. For many symbols, we have to use their HTML entities e.g. `&#x201F;`. Do not convert HTML entities to other forms e.g. `\uXXXX`.
 
-Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs. You must decide the appropriate styles of `<bullet>` by setting its `class` attribute if there is a bullet point.
+Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs. You must decide the appropriate styles of `<bullet>` by setting its `class` attribute if there is a bullet point. You can add `<gap />`s before, after, and/or between paragraphs as you see appropriate.
 
 `insert_paragraph` returns the paragraph IDs of the inserted paragraphs that you can use in other operations like adding a comment.
 
@@ -200,7 +200,7 @@ Input params: `paragraphId` (required)
 
 Getting a paragraph by ID is useful when you want to add a comment over a paragraph that has already been rewritten.
 
-The result will also contain the surrounding `<gap>`s if exists. This helps indicate how the surrounding gaps of the paragraph are implemented.
+The result will also contain the surrounding `<gap />`s if exists. This helps indicate how the surrounding gaps of the paragraph are implemented.
 
 ### Reads a PDF file
 
