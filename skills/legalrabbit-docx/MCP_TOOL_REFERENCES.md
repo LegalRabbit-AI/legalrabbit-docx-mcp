@@ -151,11 +151,14 @@ Try to preserve the styles of the paragraph and the spans involved.
 ### Inserts a paragraph
 
 Tool: `insert_paragraph`
-Input params: `newParagraphs` (required) and `insertBeforeParagraphId`
+Input params: `newParagraphs` (required), `insertBeforeParagraphId` (optional), `insertAfterParagraphId` (optional)
 
 For inserting one or more paragraphs, you will need to specify the following parameters:
 1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s without the `id` attribute. If a paragraph starts with a bullet point, you must choose the appropriate `id` and `level` attribute for `<bullet>`; both attributes must not be `null`. The content of `<bullet>` will be automatically generated based on its `id` and `level` attribute.
-2. `insertBeforeParagraphId`: the insertion position before the existing paragraph ID. If it is set to `null`, then the new paragraph will be inserted as the last paragraph. You must never set this param to an empty string.
+2. `insertBeforeParagraphId`: the insertion position before the existing paragraph or gap ID. If it is set to `null` or not specified, then this param isn't used. You must never set this param to an empty string.
+3. `insertAfterParagraphId`: the insertion position after the existing paragraph or gap ID. If it is set to `null` or not specified, then this param isn't used. You must never set this param to an empty string.
+
+If both `insertBeforeParagraphId` and `insertAfterParagraphId` are `null`, then the paragraph will be inserted as the last paragraph. `insertBeforeParagraphId` and `insertAfterParagraphId` cannot be both specified with non-null values at the same time.
 
 You must not use `<ins>` or `<del>` when inserting a new paragraph. You must not set the `id` attribute of a new paragraph.
 
@@ -197,7 +200,7 @@ Input params: `paragraphId` (required)
 
 Getting a paragraph by ID is useful when you want to add a comment over a paragraph that has already been rewritten.
 
-The result will also contain the surrounding empty paragraphs if exists. This helps indicate how the surrounding gaps of the paragraph are implemented.
+The result will also contain the surrounding `<gap>`s if exists. This helps indicate how the surrounding gaps of the paragraph are implemented.
 
 ### Reads a PDF file
 

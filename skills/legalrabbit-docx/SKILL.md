@@ -37,6 +37,7 @@ Here are the supported tags:
 5. `<ins>` represents a tracked insertion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes. 
 6. `<del>` represents a tracked deletion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes.
 7. `<commentRangeStart>` and `<commentRangeEnd>` represent the start and end of a comment range. It can appear anywhere within or between paragraphs. It has the `id` attribute to indicate which comment this range belongs to.
+8. `<gap>` represents an empty paragraph. Many docx files use one or more `<gap>` to represents the gap between 2 paragraphs. It can contain the `class` attribute, which represents the style.
 
 The styles are represented by the `class` attribute. Here are the supported CSS classes:
 - `p-style-[<predefined_style>]`: apply the predefined style to a paragraph. The `predefined_style` name is often self-explanatory.
@@ -125,11 +126,11 @@ After finishing with your operations, you must use the `close_docx_file` tool to
 
 When inserting a new paragraph, you must determine the surrounding gaps of the new paragraph. 
 
-Sometimes `pt-[<number>px]` and/or `pb-[<number>px]` are used. Sometimes one or more empty whitespaces-only paragraphs are used. Sometimes it's both. 
+Sometimes `pt-[<number>px]` and/or `pb-[<number>px]` are used. Sometimes one or more `<gap>`s are used. Sometimes it's both. 
 
 If you don't know how the gap is implemented, you can use the `get_paragraph` tool to get a specific paragraph and its gap; you will see how the gaps are implemented. 
 
-Then, you must ensure the gaps surrounded the inserted paragraph follow the pattern used in the doc. For example, if 2 empty paragraphs are used as a gap, then you must maintain the pattern.
+Then, you must ensure the gaps surrounded the inserted paragraph follow the pattern used in the doc. For example, if 2 empty `<gap>`s with certain styles (which is in the `class` attribute) are used as a gap between 2 paragraphs, then you must maintain the pattern.
 
 ## Handles an MCP tool error
 
