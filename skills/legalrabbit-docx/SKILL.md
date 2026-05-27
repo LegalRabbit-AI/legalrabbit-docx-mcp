@@ -113,6 +113,8 @@ To create a new docx file, you can use the `open_docx_file` tool with the `isNew
 
 The new docx will inherit the styles from the template. Therefore, you must first use the `get_template_content` tool to understand its styles, so you can use appropriate styles when you insert new paragraphs.
 
+The bullet point levels from the template are copied over to the new doc. Therefore, you can refer to a bullet point level's ID and level from the template without creating one.
+
 The new docx will have empty content. You can use the tools like `insert_paragraph` to insert new paragraphs.  You must pay attention to the styles of the paragraphs, spans, and bullet points. You must ensure the styles match the template's styles.
 
 When creating the docx file, you are allowed to change the content of the docx file directly. You are also allowed to redline when appropriate.
