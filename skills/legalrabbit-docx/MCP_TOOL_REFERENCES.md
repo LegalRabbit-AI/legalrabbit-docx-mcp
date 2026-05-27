@@ -154,7 +154,7 @@ Tool: `insert_paragraph`
 Input params: `newParagraphs` (required) and `insertBeforeParagraphId`
 
 For inserting one or more paragraphs, you will need to specify the following parameters:
-1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s without the `id` attribute. If a paragraph starts with a bullet point, you must choose the appropriate bullet point ID and level for the element `<bullet>`. The content of `<bullet>` doesn't matter and will be automatically generated based on its `id` and `level` attribute.
+1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s without the `id` attribute. If a paragraph starts with a bullet point, you must choose the appropriate `id` and `level` attribute for `<bullet>`; both attributes must not be `null`. The content of `<bullet>` will be automatically generated based on its `id` and `level` attribute.
 2. `insertBeforeParagraphId`: the insertion position before the existing paragraph ID. If it is set to `null`, then the new paragraph will be inserted as the last paragraph. You must never set this param to an empty string.
 
 You must not use `<ins>` or `<del>` when inserting a new paragraph. You must not set the `id` attribute of a new paragraph.
