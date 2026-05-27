@@ -3,10 +3,7 @@
     "legalrabbit-docx": {
       "type": "stdio",
       "command": "${CLAUDE_PLUGIN_ROOT}/bin/downloader.sh",
-      "args": [],
-      "env": {
-        "APP_VERSION": "0.1.0"
-      }
+      "args": []
     }
   }
 }

@@ -35,5 +35,5 @@ else
     echo "File already exists, skipping download: ${FILEPATH}" >&2
 fi
 
-# Execute the binary and pass the stdin from bash to the binary
-exec "${FILEPATH}" <&0
+
+export APP_VERSION="${VERSION}" && export CLAUDE_PLUGIN_DATA="${CLAUDE_PLUGIN_DATA}" && exec "${FILEPATH}" <&0
