@@ -33,4 +33,6 @@ if %ERRORLEVEL% EQU 0 (
     exit /b 1
 )
 
+set "APP_VERSION=%VERSION%"
+
 %~dp0\legalrabbit-docx-mcp.exe
