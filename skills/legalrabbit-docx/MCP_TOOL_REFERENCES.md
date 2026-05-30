@@ -28,7 +28,9 @@ The legalrabbit-docx MCP tool references.
 Tool: `read_docx_file_content`
 Input params: `filePath` (required), `characterCountLimit`, and `startingAfterParagraphId`
 
-You can get the content of a docx file using the `read_docx_file_content` tool. It supports pagination where you can specify the `characterCountLimit` param (max: 20000) to limit the number of characters returned and the `startingAfterParagraphId` param to start after a specific paragraph. You should set the `characterCountLimit` to `20000`.
+You can get the plain-text content of a docx file using the `read_docx_file_content` tool. It supports pagination where you can specify the `characterCountLimit` param (max: 20000) to limit the number of characters returned and the `startingAfterParagraphId` param to start after a specific paragraph. You should set the `characterCountLimit` to `20000`.
+
+Each paragraph is prepended with the paragraph ID that looks like `[id: PARAGRAPH_ID]`. You can use the `get_paragraph` tool to get the specific paragraph with its style before performing modifications. The paragraph may contain <ins> and <del> to indicate tracked insertions and deletions.
 
 The response contains `content`, `lastParagraphId` (for using in the next subsequent `read_docx_file_content` calls), and `hasMore` (indicating whether there is more content to be fetched).
 
@@ -45,7 +47,7 @@ The response contains `content`, `lastParagraphId` (for using in the next subseq
 
 `get_plain_text_content` is excellent when you want to review the content of the docx file without formatting.
 
-Each paragraph is prepended with the paragraph ID that looks like `[id: PARAGRAPH_ID]`. You can use the `get_paragraph` tool to get the specific paragraph with its style before performing modifications.
+Each paragraph is prepended with the paragraph ID that looks like `[id: PARAGRAPH_ID]`. You can use the `get_paragraph` tool to get the specific paragraph with its style before performing modifications. The paragraph may contain <ins> and <del> to indicate tracked insertions and deletions.
 
 You must invoke `open_docx_file` before using `get_content`.
 
@@ -81,21 +83,12 @@ You can get all comments in a docx file using the `get_comments` tool. The respo
 ### Adds a comment
 
 Tool: `add_comment`
-Input params: `rewrittenParagraph` (required) and `commentText` (required)
+Input params: `paragraphId` (required), `commentedOverText` (required) and `commentText` (required)
 
-For adding a comment, you must pick a paragraph that you want to comment over and insert `<newCommentRangeStart />` and `<newCommentRangeEnd />` to indicate which part is being commented over. You will need to specify the following parameters:
-1. `rewrittenParagraph`: the rewritten paragraph with its `id` attribute to indicate which paragraph. One `<newCommentRangeStart />` and one `<newCommentRangeEnd />` must be inserted. Between `<newCommentRangeStart />` and `<newCommentRangeEnd />`, only `<span>`s are allowed. 
-2. `commentText`: the comment itself.
-
-If applicable, you should rewrite the paragraph, add  `<ins>`, add `<del>`, and add a comment at the same time.
-
-You should only call the `get_paragraph` tool to get the updated paragraph if you've previously modified the paragraph; otherwise, you should not invoke `get_paragraph`.
-
-If you want the comment to range over a part of `<span>`, then you must split the `<span>` into multiple `<span>`s.
-
-You must pay attention to the styles and try to preserve the styles of the paragraph and the spans involved.
-
-`<newCommentRangeStart />` and `<newCommentRangeEnd />` are self-closing tags aka void elements.
+For adding a comment, you must provide the following params:
+1. `paragraphId`: the paragraph ID that you want to comment over.
+2. `commentedOverText`: the plain-text text within the selected paragraph that you want to comment over.
+3. `commentText`: the comment itself.
 
 ### Adds reply
 

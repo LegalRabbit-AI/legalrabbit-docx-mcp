@@ -45,8 +45,7 @@ Here are the supported tags:
 4. `<table>`, `<tr>`, `<td>` represents a table, a row, and a cell within a row. Table isn't supported when creating a new docx file.
 5. `<ins>` represents a tracked insertion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes. 
 6. `<del>` represents a tracked deletion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes.
-7. `<commentRangeStart>` and `<commentRangeEnd>` represent the start and end of a comment range. It can appear anywhere within or between paragraphs. It has the `id` attribute to indicate which comment this range belongs to.
-8. `<gap />` represents an empty paragraph. Many docx files use one or more `<gap />` to represents the gap between 2 paragraphs. It can contain the `class` attribute, which represents the style.
+7. `<gap />` represents an empty paragraph. Many docx files use one or more `<gap />` to represents the gap between 2 paragraphs. It can contain the `class` attribute, which represents the style.
 
 The styles are represented by the `class` attribute. Here are the supported CSS classes:
 - `p-style-[<predefined_style>]`: apply the predefined style to a paragraph. The `predefined_style` name is often self-explanatory.
@@ -86,14 +85,15 @@ A comment may have one or more replies. Here's the comment structure:
 - `text`: the text of the comment
 - `author`: the author of the comment. If the `author` is `LegalRabbit`, then it is your own comment.
 - `date`: the date and time when the comment was created
-- `context`: the location of the comment in the docx file. The context is a part of the docx content with the comment range (`<commentRangeStart />` and `<commentRangeEnd />`).
-- `replies`: a list of replies to the comment. Each reply has the same structure as the comment except for `replies` and `context`
+- `commentedOverText`: the part of the doc where the comment was made over.
+- `relevantParagraphs`: the paragraphs that contains the `commentedOverText`. This helps you understand the context of the comment.
+- `replies`: a list of replies to the comment. Each reply has the same structure as the comment except for `replies`, `commentedOverText`, and `relevantParagraphs`
 
 You can delete a comment or a reply by using the `delete_comment` or `delete_reply` tool. You can resolve a comment by using the `resolve_comment` tool.
 
 ## Reads docx content in the read-only mode
 
-Sometimes you may want to read the content of a docx file without modifying it. You can use the `read_docx_file_content` tool to do so without going through the flow of opening, getting content, and closing a docx file.
+Sometimes you may want to read the plain-text content of a docx file without modifying it. You can use the `read_docx_file_content` tool to do so without going through the flow of opening, getting content, and closing a docx file.
 
 ## Reviews a docx file
 
