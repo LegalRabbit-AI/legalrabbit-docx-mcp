@@ -1,5 +1,5 @@
 ---
-name: legalrabbit-docx-agent
+name: legalrabbit-docx-subagent
 description: Specialized in interacting with docx files. Use when user wants to create, edit, redline, or add comment to a docx file.
 model: sonnet
 effort: medium
