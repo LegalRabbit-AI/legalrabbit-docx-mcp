@@ -1,7 +1,7 @@
 {
   "name": "legalrabbit-docx",
   "description": "LegalRabbit DOCX plugin that enables your Claude to redline and add comment to your local docx files. Completely local.",
-  "version": "0.4.0-rc2",
+  "version": "0.4.0-rc3",
   "author": {
     "name": "legalrabbit.ai"
   }
