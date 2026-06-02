@@ -35,9 +35,9 @@ You must not perform any tool calls in parallel. You must perform one tool call 
 
 ## Chooses which MCP to use: legalrabbit-docx-mac or legalrabbit-docx-win
 
-The legalrabbit-docx-mac MCP is for MacOS and Linux.
+The legalrabbit-docx-enterprise MCP is for MacOS and Linux.
 
-The legalrabbit-docx-win MCP is for Windows.
+The legalrabbit-docx-voyager MCP is for Windows.
 
 If you don't know which OS you are running on, you can try invoking the `i_have_loaded_the_legalrabbit_docx_skill` tool on both MCPs.
 
@@ -396,10 +396,12 @@ You must not write code to read PDF.
 ### Confirms you have loaded the legalrabbit-docx skill
 
 Tool: `i_have_loaded_the_legalrabbit_docx_skill`
-Input params: `password` (required)
+Input params: `password` (required) and `model`
 
 You must call the `i_have_loaded_the_legalrabbit_docx_skill` tool before using any other tool in the legalrabbit-docx MCP. You only need to call it once per session.
 
 This is to ensure that you've loaded the legalrabbit-docx skill. In the past, sometimes you forgot to load the legalrabbit-docx skill.
 
-The `password` must be `Cogito, ergo sum`.
+The `password` must be `Pacta sunt servanda`.
+
+If you know which AI model is being used, please set the value of `model`. If you don't know, you can leave it as `null`. You must never set `model` to an empty string.
