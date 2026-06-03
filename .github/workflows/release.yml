@@ -1,0 +1,46 @@
+name: release
+
+on:
+  push:
+    tags:
+      - '*'
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Optional tag. Default to the tag of the selected branch.'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Build a zip file
+        run: zip -r legalrabbit-docx.zip ./agents ./skills
+      - name: Build the MCP executables
+        uses: actions/checkout@v4
+        with:
+          repository: 'tanin47/legalrabbit-mcpb'
+          token: ${{ secrets.MCPB_PRIVATE_REPO_PAT }}
+          path: legalrabbit-mcpb
+      - name: Build the MCP executables
+        run: bun run bun-test && bun run build-mac && bun run build-win
+      - name: Create a release
+        uses: softprops/action-gh-release@v2
+        with:
+          prerelease: true
+          files: |
+            legalrabbit-docx.zip
+            legalrabbit-mcpb/dist/mac/legalrabbit-docx-mcp
+            legalrabbit-mcpb/dist/win/legalrabbit-docx-mcp.exe
+          overwrite_files: true
+          fail_on_unmatched_files: true
+          generate_release_notes: false
+          append_body: false
+          tag_name: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.tag || github.ref_name }}
