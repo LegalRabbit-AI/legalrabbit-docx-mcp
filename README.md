@@ -33,14 +33,13 @@ Example prompts
 How to install
 ---------------
 
-You will need to install our marketplace. The reason for using a marketplace is its auto-update functionality. Please follow the step below:
-
-1. Open your Cowork and go to `Customize`
-2. Click on the `+` on the right side of `Personal Plugins`.
-3. Choose `+ Create Plugin >` and `Add marketplace`
-4. Select `Add from a repository`
-5. Input the url: `https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin`
-6. Click `Sync`
+1. Go to the release page and pick the latest version from the [releases page](https://github.com/LegalRabbit/LegalRabbit-Claude-Plugin/releases)
+2. Download `Source code (zip)`
+3. Open your Cowork and go to `Customize`
+4. Click on the `+` on the right side of `Personal Plugins`.
+5. Choose `+ Create Plugin >` and `Upload Plugin`
+6. Upload the downloaded `Source code (zip)` and click `Upload`
+7. There will be a warning about our local MCP server named `docx`. Please click `Continue`.
 
 Now you can test it using the example prompt above.
 
