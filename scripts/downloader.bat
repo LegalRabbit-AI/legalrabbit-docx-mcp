@@ -15,14 +15,16 @@ if exist "%ZIP_FILE_PATH%" (
     )
 )
 
-curl -R -L -s -z "%ZIP_FILE_PATH%" -o "%ZIP_FILE_PATH%" "https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/download/%INTERNAL_VERSION%/legalrabbit-docx.manifest"
+curl -R -L -s -f -z "%ZIP_FILE_PATH%" -o "%ZIP_FILE_PATH%.tmp" "https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/download/%INTERNAL_VERSION%/legalrabbit-docx.manifest"
 
 if %ERRORLEVEL% EQU 0 (
+    move /y "%ZIP_FILE_PATH%.tmp" "%ZIP_FILE_PATH%" >nul
     echo Downloaded %ZIP_FILE_PATH% successful! 1>&2
 ) else (
-    if exist "%ZIP_FILE_PATH%" del /q "%ZIP_FILE_PATH%" 2>nul
-    echo Downloading %ZIP_FILE_PATH% failed with error code: %ERRORLEVEL% 1>&2
-    exit /b 1
+    if not exist "%ZIP_FILE_PATH%" (
+        echo Downloading %ZIP_FILE_PATH% failed with error code: %ERRORLEVEL% 1>&2
+        exit /b 1
+    )
 )
 
 if exist "%PLUGIN_DIR%\agents" (
@@ -49,14 +51,16 @@ if exist "%MCP_EXECUTABLE_PATH%" (
     )
 )
 
-curl -R -L -s -z "%MCP_EXECUTABLE_PATH%" -o "%MCP_EXECUTABLE_PATH%" "https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/download/%INTERNAL_VERSION%/legalrabbit-docx-mcp.exe"
+curl -R -L -s -f -z "%MCP_EXECUTABLE_PATH%" -o "%MCP_EXECUTABLE_PATH%.tmp" "https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/download/%INTERNAL_VERSION%/legalrabbit-docx-mcp.exe"
 
 if %ERRORLEVEL% EQU 0 (
+    move /y "%MCP_EXECUTABLE_PATH%.tmp" "%MCP_EXECUTABLE_PATH%" >nul
     echo Downloaded %MCP_EXECUTABLE_PATH% successful! 1>&2
 ) else (
-    del /q "%MCP_EXECUTABLE_PATH%" 2>nul
-    echo Downloading %MCP_EXECUTABLE_PATH% failed with error code: %ERRORLEVEL% 1>&2
-    exit /b 1
+    if not exist "%MCP_EXECUTABLE_PATH%" (
+        echo Downloading %MCP_EXECUTABLE_PATH% failed with error code: %ERRORLEVEL% 1>&2
+        exit /b 1
+    )
 )
 
 :: Define the JSON file name
