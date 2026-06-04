@@ -4,7 +4,7 @@ description: "Interacts with docx files. Use when user wants to read, create, ed
 user-invocable: false
 ---
 
-You must use the legalrabbit-docx-subagent subagent to read and edit docx files. 
+You must use the legalrabbit-docx-subagent subagent (located at: `../../agents/legalrabbit-docx-subagent.md` relative to this file) to read and edit docx files. You must not use either the Anthropic's docx skill, the docx-python library, nor the Node's docx library.
 
 The legalrabbit-docx-subagent subagent is NOT responsible for reviewing and understanding the content.
 

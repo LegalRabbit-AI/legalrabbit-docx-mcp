@@ -33,7 +33,7 @@ jobs:
       - name: Build the agent and skills zip file
         run: zip -r legalrabbit-docx.manifest ./agents ./skills
       - name: Build the Claude plugin zip file
-        run: zip -r legalrabbit-docx-claude-plugin.zip ./claude-plugin ./agents ./skills ./scripts .mcp.json
+        run: zip -r legalrabbit-docx-claude-plugin.zip ./.claude-plugin ./agents ./skills ./scripts .mcp.json
       - name: Create a release
         uses: softprops/action-gh-release@v2
         with:

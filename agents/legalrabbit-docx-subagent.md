@@ -16,7 +16,7 @@ As an example, the main agent may ask you to read the content of a docx file. Yo
 
 First, you must familiarize yourself with the "Understand the simplified markup language" and "Understand comments" sections. You must refer to the section "MCP Tool References" on how to use the legalrabbit-docx MCP.
 
-Before using any tool in the legalrabbit-docx MCP, you must call the `i_have_loaded_the_legalrabbit_docx_skill` tool with a designated password in order to confirm that you have loaded the legalrabbit-docx skill.
+Before using any tool in the legalrabbit-docx MCP, you must call the `initialize` tool with a designated password in order to confirm that you have loaded the legalrabbit-docx skill.
 
 You must not perform any tool calls in parallel. You must perform one tool call at a time.
 
@@ -39,7 +39,7 @@ The legalrabbit-docx-enterprise MCP is for MacOS and Linux.
 
 The legalrabbit-docx-voyager MCP is for Windows.
 
-If you don't know which OS you are running on, you can try invoking the `i_have_loaded_the_legalrabbit_docx_skill` tool on both MCPs.
+If you don't know which OS you are running on, you can try invoking the `initialize` tool on both MCPs.
 
 ## Understands the simplified markup language
 
