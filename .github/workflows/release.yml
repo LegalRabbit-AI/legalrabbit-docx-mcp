@@ -30,14 +30,17 @@ jobs:
         run: |
           MCPB_SHA=$(cd legalrabbit-mcpb && git rev-parse HEAD)
           sed -i "s/\[SIGNATURE\]/${MCPB_SHA}/g" ./agents/legalrabbit-docx-subagent.md
-      - name: Build a zip file
+      - name: Build the agent and skills zip file
         run: zip -r legalrabbit-docx.manifest ./agents ./skills
+      - name: Build the Claude plugin zip file
+        run: zip -r legalrabbit-docx-claude-plugin.zip ./claude-plugin ./agents ./skills ./scripts .mcp.json
       - name: Create a release
         uses: softprops/action-gh-release@v2
         with:
           prerelease: true
           draft: true
           files: |
+            legalrabbit-docx-claude-plugin.zip
             legalrabbit-docx.manifest
             legalrabbit-mcpb/dist/mac/legalrabbit-docx-mcp
             legalrabbit-mcpb/dist/win/legalrabbit-docx-mcp.exe

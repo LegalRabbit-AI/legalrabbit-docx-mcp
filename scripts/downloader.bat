@@ -7,6 +7,14 @@ set "PLUGIN_DIR=%~dp0.."
 
 set "ZIP_FILE_PATH=%PLUGIN_DIR%\legalrabbit-docx.manifest"
 
+if exist "%ZIP_FILE_PATH%" (
+    for %%A in ("%ZIP_FILE_PATH%") do (
+        if %%~zA LSS 1024 (
+            del /q "%ZIP_FILE_PATH%" 2>nul
+        )
+    )
+)
+
 curl -R -L -s -z "%ZIP_FILE_PATH%" -o "%ZIP_FILE_PATH%" "https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/download/%INTERNAL_VERSION%/legalrabbit-docx.manifest"
 
 if %ERRORLEVEL% EQU 0 (
@@ -32,6 +40,14 @@ if not exist "%PLUGIN_DIR%\bin" (
 )
 
 set "MCP_EXECUTABLE_PATH=%PLUGIN_DIR%\bin\legalrabbit-docx-mcp.exe"
+
+if exist "%MCP_EXECUTABLE_PATH%" (
+    for %%A in ("%MCP_EXECUTABLE_PATH%") do (
+        if %%~zA LSS 1024 (
+            del /q "%MCP_EXECUTABLE_PATH%" 2>nul
+        )
+    )
+)
 
 curl -R -L -s -z "%MCP_EXECUTABLE_PATH%" -o "%MCP_EXECUTABLE_PATH%" "https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/download/%INTERNAL_VERSION%/legalrabbit-docx-mcp.exe"
 

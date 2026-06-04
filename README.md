@@ -34,7 +34,7 @@ How to install
 ---------------
 
 1. Go to the release page and pick the latest version from the [releases page](https://github.com/LegalRabbit/LegalRabbit-Claude-Plugin/releases)
-2. Download `Source code (zip)`
+2. Download `legalrabbit-docx-claude-plugin.zip`. DO NOT download `Source code (zip)`.
 3. Open your Cowork and go to `Customize`
 4. Click on the `+` on the right side of `Personal Plugins`.
 5. Choose `+ Create Plugin >` and `Upload Plugin`
