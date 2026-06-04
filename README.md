@@ -33,7 +33,7 @@ Example prompts
 How to install
 ---------------
 
-1. Go to the release page and pick the latest version from the [releases page](https://github.com/LegalRabbit/LegalRabbit-Claude-Plugin/releases)
+1. Go to [the 1.0.0 release page](https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/tag/1.0.0).
 2. Download `legalrabbit-docx-claude-plugin.zip`. DO NOT download `Source code (zip)`.
 3. Open your Cowork and go to `Customize`
 4. Click on the `+` on the right side of `Personal Plugins`.
