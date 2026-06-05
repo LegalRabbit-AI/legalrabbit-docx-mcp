@@ -44,6 +44,7 @@ jobs:
         with:
           prerelease: false
           draft: false
+          make_latest: false
           files: |
             legalrabbit-docx-claude-plugin.zip
             legalrabbit-docx.manifest
