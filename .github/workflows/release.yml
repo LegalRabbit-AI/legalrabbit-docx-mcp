@@ -42,8 +42,8 @@ jobs:
       - name: Create a release
         uses: softprops/action-gh-release@v2
         with:
-          prerelease: true
-          draft: true
+          prerelease: false
+          draft: false
           files: |
             legalrabbit-docx-claude-plugin.zip
             legalrabbit-docx.manifest
