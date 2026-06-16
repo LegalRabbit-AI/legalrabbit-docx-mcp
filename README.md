@@ -52,7 +52,7 @@ How to install
 4. On the Plugins page, click on the `legalrabbit-tools` marketplace.
 5. Click `Add plugin` on the Legalrabbit Docx plugin.
 
-🛠️__Testing__
+🛠️ __Testing__
 
 Please first put `You must use the legalrabbit-docx skill for interacting with docx files` in `CLAUDE.md` or `AGENTS.md`.
 
