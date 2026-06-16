@@ -33,17 +33,18 @@ Example prompts
 How to install
 ---------------
 
-For Claude Cowork:
+![Claude Installation](https://raw.githubusercontent.com/LegalRabbit-AI/legalrabbit-media/main/claude.jpg) __For Claude Cowork:__
 
-1. Go to [the 1.0.0 release page](https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/tag/1.0.0).
-2. Download `legalrabbit-docx-claude-plugin.zip`. DO NOT download `Source code (zip)`.
-3. Open your Cowork and go to `Customize`
-4. Click on the `+` on the right side of `Personal Plugins`.
-5. Choose `+ Create Plugin >` and `Upload Plugin`
-6. Upload the downloaded `legalrabbit-docx-claude-plugin.zip` and click `Upload`
-7. There will be a warning about our local MCP server named `docx`. Please click `Continue`.
+1. Open your Cowork and go to `Customize`
+2. Click on the `+` on the right side of `Personal Plugins`.
+3. Choose `+ Create Plugin >` and `Add marketplace`
+4. Fill `URL` with `https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin and click `Sync`
+4. Select `Add from a repository`
+5. Click on the `+` on the right side of `Personal Plugins` and select `Browse plugins`
+6. Go to the `Personal` tab and click on the `legalrabbit-docx-claude-plugin` tab.
+7. Click on the `+` button of the plugin `Legalrabbit docx`
 
-For Codex:
+![Claude Installation](https://raw.githubusercontent.com/LegalRabbit-AI/legalrabbit-media/main/openai.jpg) __For Codex:__
 
 1. Go to `Plugins` and click the `+ v` (the down arrow next to the plug button) on the top right corner
 2. Select `+ Add marketplace`
@@ -51,7 +52,11 @@ For Codex:
 4. On the Plugins page, click on the `legalrabbit-tools` marketplace.
 5. Click `Add plugin` on the Legalrabbit Docx plugin.
 
-Now you can test it using the example prompt above.
+🛠️__Testing__
+
+Please first put `You must use the legalrabbit-docx skill for interacting with docx files` in `CLAUDE.md` or `AGENTS.md`.
+
+Then, you can try `Create a beautifully written short docx`
 
 
 Support
