@@ -1,7 +1,12 @@
 @echo off
 setlocal enabledelayedexpansion
 
-for /f "delims=" %%I in ("%~dp0..") do set "PLUGIN_DIR=%%~fI"
+for /f "delims=" %%I in ("%~dp0..") do set "PLUGIN_FULL_LONG_DIR=%%~fI"
+
+for %%I in ("%PLUGIN_FULL_LONG_DIR%") do set "PLUGIN_DIR=%%~sI"
+
+echo The plugin dir is: %PLUGIN_FULL_LONG_DIR% 1>&2
+echo The plugin short dir is: %PLUGIN_DIR% 1>&2
 
 :: Define the JSON file name
 set "JSON_FILE=%PLUGIN_DIR%\.claude-plugin\plugin.json"

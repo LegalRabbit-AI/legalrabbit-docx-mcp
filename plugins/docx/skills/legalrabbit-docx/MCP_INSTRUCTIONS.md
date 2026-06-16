@@ -1,28 +1,14 @@
----
-name: legalrabbit-docx-subagent
-description: Specialized in interacting with docx files. Use when user wants to create, edit, redline, or add comment to a docx file.
-model: sonnet
-effort: medium
----
-
-You are a docx reader and editor. You must use the legalrabbit-docx MCP to interact with a docx file. You must not use either the Anthropic's docx skill, the docx-python library, nor the Node's docx library.
-
-You are responsible for reading and manipulating the docx file and ensuring the styles and the gaps between the paragraphs are appropriate. The main agent is responsible for determining what to read, add, edit, and delete. If the main agent wants to read the content, you should fetch the plain-text content using the `get_plain_text_content` tool.
-
-As an example, the main agent may ask you to read the content of a docx file. You must return the content of the docx file to the main agent. Then, the main agent will tell you what to edit and comment. Then, you will edit and comment on the docx file as instructed. 
-
-
 # The legalrabbit-docx MCP
 
 First, you must familiarize yourself with the "Understand the simplified markup language" and "Understand comments" sections. You must refer to the section "MCP Tool References" on how to use the legalrabbit-docx MCP.
 
-Before using any tool in the legalrabbit-docx MCP, you must call the `initialize` tool with a designated password in order to confirm that you have loaded the legalrabbit-docx skill.
+Before using any tool, you must choose the correct MCP server. See: "Chooses which MCP server to use". Then, you must call the `initialize` tool with a designated signature (you must read the `initialize` MCP reference for the signature) to confirm that you have loaded the legalrabbit-docx skill.
 
 You must not perform any tool calls in parallel. You must perform one tool call at a time.
 
 ## Contents
 
-- Chooses which MCP to use: legalrabbit-docx-nix or legalrabbit-docx-win
+- Chooses which MCP server to use
 - Understands the simplified markup language
 - Understands comments
 - Reads docx content in the read-only mode
@@ -32,14 +18,18 @@ You must not perform any tool calls in parallel. You must perform one tool call 
 - Inserts a new paragraph and handles its surrounding gaps
 - Handles an MCP tool error
 - MCP Tool References
+-
+## Chooses which MCP server to use
 
-## Chooses which MCP to use: legalrabbit-docx-mac or legalrabbit-docx-win
+You must choose which MCP server to use based on 2 factors: (1) Whether you are Claude or Codex and (2) whether you run on MacOS or Windows.
 
-The legalrabbit-docx-enterprise MCP is for MacOS and Linux.
+For Claude on MacOS, use legalrabbit-docx-enterprise.
 
-The legalrabbit-docx-voyager MCP is for Windows.
+For Codex on MacOS, use legalrabbit-docx-discovery.
 
-If you don't know which OS you are running on, you can try invoking the `initialize` tool on both MCPs.
+For Claude on Windows, use legalrabbit-docx-voyager.
+
+For Codex on Windows, use legalrabbit-docx-defiant.
 
 ## Understands the simplified markup language
 
@@ -50,7 +40,7 @@ Here are the supported tags:
 2. `<bullet>` represents a bullet point and contains a label. It has the `id` (represents the bullet ID), `level` (represents the bullet level), and `class` (represents the style) attributes. It must not contain any other element.
 3. `<span>` represents a piece of text within a paragraph. It can optionally has the `class` attribute, which represents its styles. It must not contain any other element. It can only contain text. Whitespaces and tabs are significant inside `<span>`.
 4. `<table>`, `<tr>`, `<td>` represents a table, a row, and a cell within a row. Table isn't supported when creating a new docx file.
-5. `<ins>` represents a tracked insertion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes. 
+5. `<ins>` represents a tracked insertion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes.
 6. `<del>` represents a tracked deletion. It can contain `<span>`s and/or `<p>`s. It has the `id`, `author`, and `date` attributes.
 7. `<gap />` represents an empty paragraph. Many docx files use one or more `<gap />` to represents the gap between 2 paragraphs. It can contain the `class` attribute, which represents the style.
 
@@ -114,7 +104,7 @@ When you want to manipulate an existing docx file (e.g. editing, redlining, addi
 
 Then, you can use the tools like `get_markup_content` and `get_comments` to read the markup content, which has styles, and comments of the docx file. Then, you can use the tools like `add_comment`, `rewrite_paragraph`, `insert_paragraph`, and many more to modify the docx file.
 
-When manipulating the docx file, you are forbidden to change the content of the docx file. You can only add comments/replies, resolve comments, delete comments/replies, redline, or perform other read-only operations. 
+When manipulating the docx file, you are forbidden to change the content of the docx file. You can only add comments/replies, resolve comments, delete comments/replies, redline, or perform other read-only operations.
 
 Redlining means to change the content by rewriting paragraphs and using the `<ins>` tag (insert content) or the `<del>` tag (delete content). `<ins>` and `<del>` have the `author` attributes. You are only allowed to change `<ins>` and `<del>` whose `author` is `LegalRabbit`.
 
@@ -140,16 +130,16 @@ After finishing with your operations, you must use the `close_docx_file` tool to
 
 ## Handles an MCP tool error
 
-You must understand the error message before retrying. 
+You must understand the error message before retrying.
 
 Here are some common errors:
-- Missing input parameters. Then, you must specify the input parameters. 
+- Missing input parameters. Then, you must specify the input parameters.
 - Invalid markup. Sometimes a certain tag isn't allowed inside another tag. Sometimes a certain tag is a self-closing tag.
 - Forbidden direct content change. Sometimes direct content change isn't allowed. You may need to use `<ins>` or `<del>` instead.
 
 You must re-read the reference for the MCP tool again to ensure you specify the parameters correctly.
 
-When retrying, you should not specify the same parameters with the same values. You should try a new set of params and values. 
+When retrying, you should not specify the same parameters with the same values. You should try a new set of params and values.
 
 Do not retry more than 3 times. If you cannot overcome the error, you must stop.
 
@@ -207,7 +197,7 @@ In the draft mode, you can specify the `templateFilePath` in order to copy the s
 
 Tool: `close_docx_file`
 
-When you finish with all operations, you must call `close_docx_file` in order to write your changes to disk. 
+When you finish with all operations, you must call `close_docx_file` in order to write your changes to disk.
 
 If you don't close the file, all your changes will not be written to disk and lost.
 
@@ -327,13 +317,13 @@ For inserting one or more paragraphs, you will need to specify the following par
 1. `newParagraphs` (required): the new paragraphs. It must contain one or more top-level `<p>`s or `<gap />`s. A `<p>` must not contain the `id` attribute. If a paragraph starts with a bullet point, you must choose the appropriate `id` and `level` attribute for `<bullet>`; both attributes must not be `null`. The content of `<bullet>` will be automatically generated based on its `id` and `level` attribute.
 2. `position`: the insertion position containing `paragraphId` and `beforeOrAfter`. `beforeOrAfter` must be either `before` or `after` to indicate whether the new paragraph should be inserted before or after the specified paragraph. If you want to insert the new paragraph at the end of the docx file, then you must specify `position` to `null`.
 
-In the redline mode, you must not use `<ins>` or `<del>` when inserting a new paragraph because `<ins>` and `<del>` are automatically inserted. You must not set the `id` attribute of a new paragraph. 
+In the redline mode, you must not use `<ins>` or `<del>` when inserting a new paragraph because `<ins>` and `<del>` are automatically inserted. You must not set the `id` attribute of a new paragraph.
 
 When inserting a paragraph, you must consider whether the new paragraph is a continuation of the previous paragraph. If the previous paragraph has `<bullet>` and the new paragraph is the continuation of the previous paragraph, you must consider using `<bullet>` with the same ID and level.
 
 Pay attention to HTML entities. For many symbols, we have to use their HTML entities e.g. `&#x201F;`. Do not convert HTML entities to other forms e.g. `\uXXXX`.
 
-Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs. You must decide the appropriate styles of `<bullet>` by setting its `class` attribute if there is a bullet point. 
+Try to match the styles of the paragraph and the spans involved; we prefer them to match the styles of the nearby paragraphs. You must decide the appropriate styles of `<bullet>` by setting its `class` attribute if there is a bullet point.
 
 You must decide how the gaps before, after, and between pargraphs should be implemented by adding `<gap />`s, setting `pt-[<number>px]`, and/or setting `pb-[<number>px]`. If you don't know how the gaps are implemented, you must use the `get_paragraph` tool to get a nearby/related paragraph to understand its gap implementation.
 
@@ -352,7 +342,7 @@ For deleting a paragraph, you will need to specify the following parameters:
 Tool: `create_bullet_point`
 Input params: `bulletPointId` (required) and `numberFormat` (required)
 
-You can create a new bullet point level. 
+You can create a new bullet point level.
 
 If you want to add one more level to the current bullet point, then you must provide the bullet point ID.
 

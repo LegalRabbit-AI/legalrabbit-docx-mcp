@@ -24,32 +24,35 @@ jobs:
           repository: 'tanin47/legalrabbit-mcpb'
           token: ${{ secrets.MCPB_PRIVATE_REPO_PAT }}
           path: legalrabbit-mcpb
+      - name: Prepare the MCP repo
+        run: cd legalrabbit-mcpb && bun install
+      - name: Run the tests on the MCP repo
+        if: ${{ !endsWith(github.event.inputs.tag, '-dev') }}
+        run: cd legalrabbit-mcpb && bun run bun-test
       - name: Build the MCP executables
-        run: cd legalrabbit-mcpb && bun install && bun run bun-test && bun run build-mac && bun run build-win
+        run: cd legalrabbit-mcpb && bun run build-mac && bun run build-win
       - name: Set the signature
+        working-directory: ./plugins/docx
         run: |
-          MCPB_SHA=$(cd legalrabbit-mcpb && git rev-parse HEAD)
-          sed -i "s/\[SIGNATURE\]/${MCPB_SHA}/g" ./agents/legalrabbit-docx-subagent.md
-      - name: Set the version
-        run: |
-          sed -i "s/\[VERSION\]/${VERSION}/g" ./.claude-plugin/plugin.json
-        env:
-          VERSION: ${{ github.event.inputs.tag }}
+          MCPB_SHA=$(cd ../../legalrabbit-mcpb && git rev-parse HEAD)
+          sed -i "s/\[SIGNATURE\]/${MCPB_SHA}/g" ./skills/legalrabbit-docx/MCP_INSTRUCTIONS.md
       - name: Build the agent and skills zip file
+        working-directory: ./plugins/docx
         run: zip -r legalrabbit-docx.manifest ./agents ./skills
       - name: Build the Claude plugin zip file
+        working-directory: ./plugins/docx
         run: zip -r legalrabbit-docx-claude-plugin.zip ./.claude-plugin ./agents ./skills ./scripts .mcp.json
       - name: Create a release
         uses: softprops/action-gh-release@v2
         with:
-          prerelease: false
+          prerelease: ${{ endsWith(github.event.inputs.tag, '-dev') }}
           draft: false
           make_latest: false
           files: |
-            legalrabbit-docx-claude-plugin.zip
-            legalrabbit-docx.manifest
-            legalrabbit-mcpb/dist/mac/legalrabbit-docx-mcp
-            legalrabbit-mcpb/dist/win/legalrabbit-docx-mcp.exe
+            ./plugins/docx/legalrabbit-docx-claude-plugin.zip
+            ./plugins/docx/legalrabbit-docx.manifest
+            ./legalrabbit-mcpb/dist/mac/legalrabbit-docx-mcp
+            ./legalrabbit-mcpb/dist/win/legalrabbit-docx-mcp.exe
           overwrite_files: true
           target_commitish: ${{ github.sha }}
           fail_on_unmatched_files: true

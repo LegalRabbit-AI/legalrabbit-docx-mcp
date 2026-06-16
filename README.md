@@ -33,6 +33,8 @@ Example prompts
 How to install
 ---------------
 
+For Claude Cowork:
+
 1. Go to [the 1.0.0 release page](https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin/releases/tag/1.0.0).
 2. Download `legalrabbit-docx-claude-plugin.zip`. DO NOT download `Source code (zip)`.
 3. Open your Cowork and go to `Customize`
@@ -40,6 +42,14 @@ How to install
 5. Choose `+ Create Plugin >` and `Upload Plugin`
 6. Upload the downloaded `legalrabbit-docx-claude-plugin.zip` and click `Upload`
 7. There will be a warning about our local MCP server named `docx`. Please click `Continue`.
+
+For Codex:
+
+1. Go to `Plugins` and click the `+ v` (the down arrow next to the plug button) on the top right corner
+2. Select `+ Add marketplace`
+3. Fill `Source` with `https://github.com/LegalRabbit-AI/legalrabbit-docx-claude-plugin` and click `Add marketplace`
+4. On the Plugins page, click on the `legalrabbit-tools` marketplace.
+5. Click `Add plugin` on the Legalrabbit Docx plugin.
 
 Now you can test it using the example prompt above.
 

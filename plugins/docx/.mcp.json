@@ -5,10 +5,22 @@
       "command": "${CLAUDE_PLUGIN_ROOT}/scripts/downloader.sh",
       "args": []
     },
+    "legalrabbit-docx-discovery": {
+      "type": "stdio",
+      "command": "./scripts/downloader.sh",
+      "args": [],
+      "cwd": "."
+    },
     "legalrabbit-docx-voyager": {
       "type": "stdio",
       "command": "${CLAUDE_PLUGIN_ROOT}/scripts/downloader.bat",
       "args": []
+    },
+    "legalrabbit-docx-defiant": {
+      "type": "stdio",
+      "command": "./scripts/downloader.bat",
+      "args": [],
+      "cwd": "."
     }
   }
 }
