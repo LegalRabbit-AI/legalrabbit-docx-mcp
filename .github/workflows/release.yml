@@ -36,12 +36,6 @@ jobs:
         run: |
           MCPB_SHA=$(cd ../../legalrabbit-mcpb && git rev-parse HEAD)
           sed -i "s/\[SIGNATURE\]/${MCPB_SHA}/g" ./skills/legalrabbit-docx/MCP_INSTRUCTIONS.md
-      - name: Set the version
-        working-directory: ./plugins/docx
-        run: |
-          sed -i "s/\[VERSION\]/${VERSION}/g" ./.claude-plugin/plugin.json
-        env:
-          VERSION: ${{ github.event.inputs.tag }}
       - name: Build the agent and skills zip file
         working-directory: ./plugins/docx
         run: zip -r legalrabbit-docx.manifest ./agents ./skills
