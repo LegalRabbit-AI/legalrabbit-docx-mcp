@@ -30,18 +30,10 @@ jobs:
         if: ${{ !endsWith(github.event.inputs.tag, '-dev') }}
         run: cd legalrabbit-mcpb && bun run bun-test
       - name: Build the MCP executables
-        run: cd legalrabbit-mcpb && bun run build-mac && bun run build-win
-      - name: Set the signature
-        working-directory: ./plugins/docx
-        run: |
-          MCPB_SHA=$(cd ../../legalrabbit-mcpb && git rev-parse HEAD)
-          sed -i "s/\[SIGNATURE\]/${MCPB_SHA}/g" ./skills/legalrabbit-docx/MCP_INSTRUCTIONS.md
+        run: cd legalrabbit-mcpb && npm run build
       - name: Build the agent and skills zip file
         working-directory: ./plugins/docx
-        run: zip -r legalrabbit-docx.manifest ./agents ./skills
-      - name: Build the Claude plugin zip file
-        working-directory: ./plugins/docx
-        run: zip -r legalrabbit-docx-claude-plugin.zip ./.claude-plugin ./agents ./skills ./scripts .mcp.json
+        run: zip -r legalrabbit-docx.manifest ./skills
       - name: Create a release
         uses: softprops/action-gh-release@v2
         with:
@@ -49,10 +41,10 @@ jobs:
           draft: false
           make_latest: false
           files: |
-            ./plugins/docx/legalrabbit-docx-claude-plugin.zip
             ./plugins/docx/legalrabbit-docx.manifest
             ./legalrabbit-mcpb/dist/mac/legalrabbit-docx-mcp
             ./legalrabbit-mcpb/dist/win/legalrabbit-docx-mcp.exe
+            ./legalrabbit-mcpb/dist/mcpb/legalrabbit-docx.mcpb
           overwrite_files: true
           target_commitish: ${{ github.sha }}
           fail_on_unmatched_files: true

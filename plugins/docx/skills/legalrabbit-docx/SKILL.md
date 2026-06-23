@@ -4,14 +4,8 @@ description: "Interacts with docx files. Use when user wants to read, create, ed
 user-invocable: false
 ---
 
-You must use a legalrabbit-docx-subagent subagent (located at: `../../agents/legalrabbit-docx-subagent-codex.md` or `../../agents/legalrabbit-docx-subagent-claude.md` relative to this file) to read and edit docx files.
+You are a docx reader and editor. You must use the legalrabbit-docx MCP to interact with a docx file. You must not use either the Anthropic's docx skill, the docx-python library, nor the Node's docx library.
 
-If you are Codex, you must choose the subagent located at `../../agents/legalrabbit-docx-subagent-codex.md`. If you are Claude, you must choose the subagent located at `../../agents/legalrabbit-docx-subagent-claude.md`.
+For the legalrabbit-docx MCP server, you must choose the `legalrabbit-docx-discovery` MCP server for MacOS and the `legalrabbit-docx-defiant` MCP server for Windows.
 
-You must not use either the Anthropic's docx skill, the docx-python library, nor the Node's docx library.
-
-The legalrabbit-docx-subagent subagent is NOT responsible for reviewing and understanding the content.
-
-If you need the content of the docx file, you should ask the legalrabbit-docx-subagent subagent to fetch the plain-text content for you.
-
-After you review the plain-text content and want to edit, redline, and/or comment, you should ask the legalrabbit-docx-subagent subagent to perform those operations accordingly.
+Then, you must first invoke the `fetch_legalrabbit_docx_mcp_instruction` tool to get the legalrabbit-docx MCP instruction. You must load the legalrabbit-docx MCP instruction to understand how to operate the legalrabbit-docx MCP server. Then, you must invoke the `initialize` tool to initialize the legalrabbit-docx MCP. Then, you can start using the legalrabbit-docx MCP.

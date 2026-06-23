@@ -1,7 +1,7 @@
 {
   "name": "legalrabbit-docx",
   "description": "Drafts, edits, redlines, and comments on your local docx files. Completely local. Uses 2-5x fewer tokens than the Anthropic's docx skill.",
-  "version": "1.0.0",
+  "version": "1.0.2-dev",
   "author": {
     "name": "legalrabbit.ai"
   }
