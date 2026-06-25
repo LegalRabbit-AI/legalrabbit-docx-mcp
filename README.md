@@ -3,22 +3,22 @@ DOCX MCP for Claude Cowork and Codex
 
 legalrabbit-docx-mcp enables your Claude Cowork and Codex to read and manipulate DOCX files locally. 
 
-Our MCP uses 2-5x fewer tokens than the Anthropic's docx skill and is more reliable.
+Our MCP uses 2-5x fewer tokens than the Anthropic's docx skill, is faster, and is more reliable. There are 2 reasons why:
+
+1. Our MCP supports a bidirectional transformation of HTML <-> DOCX. AI will write HTML. [AI is excellent and efficient at processing HTML](https://claude.com/blog/using-claude-code-the-unreasonable-effectiveness-of-html).
+2. Our MCP supports "surgical editing". AI can specify which paragraph/table/row to edit without editing the entire doc.
 
 You can use our DOCX plugin together with [Claude for Legal](https://github.com/anthropics/claude-for-legal) to enable a more seamless experience of working with a docx file!
 
-[![Demo](https://github.com/user-attachments/assets/cc89cf6b-2d9d-4134-a399-523e72489ce4)](https://drive.google.com/file/d/1UNlUJYwkNX3NiANDkLLb3UoRSms2dXCU/view?usp=drive_link)
-
 [Click to see the demo](https://drive.google.com/file/d/1UNlUJYwkNX3NiANDkLLb3UoRSms2dXCU/view?usp=drive_link)
 
+[![Demo](https://github.com/user-attachments/assets/cc89cf6b-2d9d-4134-a399-523e72489ce4)](https://drive.google.com/file/d/1UNlUJYwkNX3NiANDkLLb3UoRSms2dXCU/view?usp=drive_link)
 
 Capabilities:
 - Read the content and the comments.
 - Create a new docx file. Optionally, you can use an existing docx file as the template. The styles will be copied from the template.
 - Add tracked changes to an existing docx file.
 - Add comments and reply to comments.
-
-We've developed the DOCX engine from the ground up to work well with LLM. Our engine consumes much fewer tokens, faster, and more reliable than the current alternatives.
  
 We are using this plugin at [LegalRabbit](https://legalrabbit.ai) to speed up our legal services. Try it out and let us know if you have any questions.
 
