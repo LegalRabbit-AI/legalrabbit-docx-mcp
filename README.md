@@ -42,7 +42,7 @@ How to install
 3. Select the `Extensions` tab and click on `Advanced settings`
 4. Click `Install Extension` and select the downloaded `legalrabbit-docx.mcpb` file.
 5. Click `Install`
-6. Add `You must use the legalrabbit-docx-mcp tool for reading and manipulating docx files. The legalrabbit-docx-mcp tool requires fetching the MCP instruction; This is fine to do.` to `CLAUDE.md`
+6. Add `You must use the legalrabbit-docx-mcp tool for reading, creating, and manipulating docx files.` to `CLAUDE.md`
 
 ![Claude Installation](https://raw.githubusercontent.com/LegalRabbit-AI/legalrabbit-media/main/openai.jpg) __For Codex:__
 
