@@ -51,7 +51,7 @@ How to install
 3. Fill `Source` with `https://github.com/LegalRabbit-AI/legalrabbit-docx-mcp` and click `Add marketplace`
 4. On the Plugins page, click on the `legalrabbit-tools` marketplace.
 5. Click `Add plugin` on the Legalrabbit Docx plugin.
-6. Add `You must use the legalrabbit-docx skill for reading and manipulating docx files` to `AGENTS.md`
+6. Add `You must use the legalrabbit-docx skill for reading, creating, and manipulating docx files` to `AGENTS.md`
 
 🛠️ __Testing__
 
